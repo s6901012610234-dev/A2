@@ -1,26 +1,36 @@
 from processing import *
+import random
 
 grid_size = [10,10]
 screen_size = [500,500]
 grid = []
+colour = [[255,100,100],[100,255,100],[100,100,255]]
 
-#===============================setup========================================
+#-------------------------------=-setup---------------------------------------
 
 def setup():
     size(screen_size[0],screen_size[1])
     strokeWeight(3)
-    y = 0
-    while y < grid_size[1]:
+    x = 0
+    while x < grid_size[1]:
         row = []
-        x = 0
-        while x < grid_size[0]:
+        y = 0
+        while y < grid_size[0]:
             row.append(0)
-            x = x + 1
+            y = y + 1
         grid.append(row)
-        y = y + 1
+        x = x + 1
 
 
-#def fillin():
+def fillin():
+    a = 0
+    while a < grid_size[1]:
+        b = 0
+        while b < grid_size[0]:
+            if grid[a][b] == 0:
+                grid[a][b] = random.randint(1,3)
+            b = b + 1
+        a = a + 1
 
 
 #def visual():
@@ -34,9 +44,11 @@ def setup():
 
 #def mousePressed():
 
+#----------------------------------draw---------------------------------------
 
 def draw():
     background(255)
+    fillin()
     cell_width = screen_size[0] / grid_size[0]
     cell_height = screen_size[1] / grid_size[1]
     i = 0
@@ -57,7 +69,9 @@ def draw():
         while x < grid_size[0]:
             cx = (x * cell_width) + (cell_width / 2)
             cy = (y * cell_height) + (cell_height / 2)
-            fill(200)
+            colour_index = grid[y][x]
+            fill_colour = colour[colour_index - 1]
+            fill(fill_colour[0], fill_colour[1], fill_colour[2])
             ellipse(cx, cy, cell_width * 0.6, cell_height * 0.6)
             x = x + 1
         y = y + 1
