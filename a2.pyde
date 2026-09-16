@@ -33,24 +33,10 @@ def fillin():
         a = a + 1
 
 
-#def visual():
-
-
-#def three_del():
-
-
-#def fall():
-
-
-#def mousePressed():
-
-#----------------------------------draw---------------------------------------
-
-def draw():
-    background(255)
-    fillin()
+def visual():
     cell_width = screen_size[0] / grid_size[0]
     cell_height = screen_size[1] / grid_size[1]
+
     i = 0
     while i <= grid_size[0]:
         x = i * cell_width
@@ -75,6 +61,22 @@ def draw():
             ellipse(cx, cy, cell_width * 0.6, cell_height * 0.6)
             x = x + 1
         y = y + 1
+
+
+#def three_del():
+
+
+#def fall():
+
+
+#def mousePressed():
+
+#----------------------------------draw---------------------------------------
+
+def draw():
+    background(255)
+    fillin()
+    visual()
 
 
 run()
