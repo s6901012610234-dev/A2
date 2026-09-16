@@ -7,7 +7,7 @@ grid = []
 colour = [[255,100,100],[100,255,100],[100,100,255]]
 selection = [False, 0, 0]
 
-#-------------------------------=-setup---------------------------------------
+#---------------------------------setup---------------------------------------
 
 def setup():
     size(screen_size[0],screen_size[1])
@@ -22,6 +22,7 @@ def setup():
         grid.append(row)
         x = x + 1
 
+#---------------------------------main----------------------------------------
 
 def fillin():
     a = 0
@@ -54,12 +55,12 @@ def visual():
     while y < grid_size[1]:
         x = 0
         while x < grid_size[0]:
-            cx = (x * cell_width) + (cell_width / 2)
-            cy = (y * cell_height) + (cell_height / 2)
+            cellx = (x * cell_width) + (cell_width / 2)
+            celly = (y * cell_height) + (cell_height / 2)
             colour_index = grid[y][x]
             fill_colour = colour[colour_index - 1]
             fill(fill_colour[0], fill_colour[1], fill_colour[2])
-            ellipse(cx, cy, cell_width * 0.6, cell_height * 0.6)
+            ellipse(cellx, celly, cell_width * 0.6, cell_height * 0.6)
             x = x + 1
         y = y + 1
 
@@ -70,7 +71,26 @@ def visual():
 #def fall():
 
 
-#def mousePressed():
+def mousePressed():
+    cell_width = screen_size[0] / grid_size[0]
+    cell_height = screen_size[1] / grid_size[1]
+    click_x = int(mouseX / cell_width)
+    click_y = int(mouseY / cell_height)
+
+    if selection[0] == False:
+        selection[0] = True
+        selection[1] = click_x
+        selection[2] = click_y
+        return
+
+    x0 = selection[1]
+    y0 = selection[2]
+    
+    temp = grid[y0][x0]
+    grid[y0][x0] = grid[click_y][click_x]
+    grid[click_y][click_x] = temp
+
+    selection[0] = False
 
 #----------------------------------draw---------------------------------------
 
