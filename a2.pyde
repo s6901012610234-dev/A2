@@ -85,10 +85,20 @@ def mousePressed():
 
     x0 = selection[1]
     y0 = selection[2]
-    
-    temp = grid[y0][x0]
-    grid[y0][x0] = grid[click_y][click_x]
-    grid[click_y][click_x] = temp
+
+    diff_x = x0 - click_x
+    if diff_x < 0:
+        diff_x = 0 - diff_x
+
+    diff_y = y0 - click_y
+    if diff_y < 0:
+        diff_y = 0 - diff_y
+
+    next_to_each_other = ((diff_x + diff_y) == 1)
+    if next_to_each_other:
+        temp = grid[y0][x0]
+        grid[y0][x0] = grid[click_y][click_x]
+        grid[click_y][click_x] = temp
 
     selection[0] = False
 
